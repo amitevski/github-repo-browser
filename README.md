@@ -3,6 +3,7 @@
 Toy project to play with react & redux. Inspired by the example app from [reduxjs](https://github.com/reactjs/redux/tree/master/examples/real-world).
 
 By default it lists github repositories from my account `amitevski`. Selecting a repository opens a detail page with a list of commits.
+You can try it at [https://amitevski.github.io/github-repo-browser](https://amitevski.github.io/github-repo-browser).
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
