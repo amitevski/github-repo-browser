@@ -22,7 +22,7 @@ class App extends Component {
           <Footer size="mini">
             <FooterSection type="left" logo="Github Repo Browser">
                 <FooterLinkList>
-                    <a href="/">Home</a>
+                    <a href="#">Home</a>
                     <a href="#">Privacy & Terms</a>
                 </FooterLinkList>
             </FooterSection>
