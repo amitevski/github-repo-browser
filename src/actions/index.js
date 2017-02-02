@@ -89,8 +89,7 @@ export const COMMITS_FAILURE = 'COMMITS_FAILURE'
 
 // Fetches commits for a specific repo.
 // Relies on the custom API middleware defined in ../middleware/api.js.
-const fetchCommits = (login, repo, nextPageUrl) => ({
-  login,
+const fetchCommits = (repo, nextPageUrl) => ({
   repo,
   [CALL_API]: {
     types: [ COMMITS_REQUEST, COMMITS_SUCCESS, COMMITS_FAILURE ],
@@ -112,7 +111,7 @@ export const loadCommits = (login, repo, nextPage) => (dispatch, getState) => {
     return null
   }
 
-  return dispatch(fetchCommits(login, repo, nextPageUrl))
+  return dispatch(fetchCommits(repo, nextPageUrl))
 }
 
 

@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
 import {Card, CardActions, CardTitle} from 'react-mdl'
 
 const User = ({ user }) => {
-  const { login, avatarUrl, name, bio } = user
+  const { avatarUrl, name } = user
   console.log(avatarUrl)
   let userStyles = {width: '256px', height: '256px', background: 'url('+avatarUrl+') center / cover', margin: 'auto'}
   return (
@@ -20,10 +19,8 @@ const User = ({ user }) => {
 
 User.propTypes = {
   user: PropTypes.shape({
-    login: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
-    name: PropTypes.string,
-    bio: PropTypes.string
+    name: PropTypes.string
   }).isRequired
 }
 

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Button } from 'react-mdl'
+import { Button, List as MdlList } from 'react-mdl'
 
 export default class List extends Component {
   static propTypes = {
@@ -44,10 +44,10 @@ export default class List extends Component {
     }
 
     return (
-      <div style={{maxWidth: "600px"}}>
+      <MdlList style={{maxWidth: "600px"}}>
         {items.map(renderItem)}
         {pageCount > 0 && !isLastPage && this.renderLoadMore()}
-      </div>
+      </MdlList>
     )
   }
 }

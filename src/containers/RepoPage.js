@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { loadCommits } from '../actions'
-import Repo from '../components/Repo'
-import User from '../components/User'
+import Commit from '../components/Commit'
 import List from '../components/List'
+import { Grid, Cell } from 'react-mdl'
 
 const loadData = props => {
   const { login, repo } = props
@@ -15,7 +15,8 @@ class RepoPage extends Component {
     login: PropTypes.string.isRequired,
     repo: PropTypes.string.isRequired,
     commitPagination: PropTypes.object,
-    commits: PropTypes.array.isRequired,
+    commits: PropTypes.object,
+    currentCommits: PropTypes.array.isRequired,
     loadCommits: PropTypes.func.isRequired
   }
 
@@ -34,18 +35,38 @@ class RepoPage extends Component {
     this.props.loadCommits(login, repo, true)
   }
 
+  renderCommit(commit) {
+    return (
+      <Commit
+        commit={commit.commit}
+        sha={commit.sha}
+        url={commit.htmlUrl}
+        key={commit.sha} />
+    )
+  }
+
 
   render() {
-    const { repo } = this.props
-    if (!repo || !commits) {
-      return <h1><i>Loading {repo} commits...</i></h1>
+    const { repo, currentCommits, login } = this.props
+    if (!repo || !currentCommits) {
+      return <h1 className="mdl-typography--headline"><i>Loading {repo} commits...</i></h1>
     }
 
-    const { commits, commitPagination } = this.props
+    const { commitPagination } = this.props
     return (
-      <div>
-        
-      </div>
+      <Grid className="page-content">
+        <Cell col={4}>
+          <h1 className="mdl-typography--headline">Commits for repo <a target="_blank" href={`https://github.com/${login}/${repo}`}>{login}/{repo}</a></h1>
+        </Cell>
+        <Cell col={8}>
+          <List renderItem={this.renderCommit}
+            items={currentCommits}
+            onLoadMoreClick={this.handleLoadMoreClick}
+            loadingLabel={`Loading ${repo}'s commits...`}
+            {...commitPagination} />
+        </Cell>
+
+      </Grid>
     )
   }
 }
@@ -62,12 +83,13 @@ const mapStateToProps = (state, ownProps) => {
   } = state
 
   const commitPagination = commitsByRepo[repo] || { ids: [] }
-  // const commits = commitPagination.ids.map(id => commits[id])
+  const currentCommits = commitPagination.ids.map(id => commits[id])
 
   return {
     login,
     repo,
     commits,
+    currentCommits,
     commitPagination
   }
 }

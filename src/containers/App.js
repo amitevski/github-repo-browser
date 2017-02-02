@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import {Layout, Navigation, Header, Drawer, Content} from 'react-mdl'
+import { Layout, Header, Content, Footer, FooterLinkList, FooterSection } from 'react-mdl'
 
 class App extends Component {
   static propTypes = {
@@ -12,15 +12,23 @@ class App extends Component {
     return (
       <div >
         <Layout fixedHeader>
-            <Header  title="Github Repository Browser">
-            </Header>
-            <Content>
-              <div className="page-content">  
+          <Header title="Github Repository Browser">
+          </Header>
+          <Content>
+            <div className="page-content">
               {children}
-              </div>
-            </Content>
+            </div>
+          </Content>
+          <Footer size="mini">
+            <FooterSection type="left" logo="Github Repo Browser">
+                <FooterLinkList>
+                    <a href="/">Home</a>
+                    <a href="#">Privacy & Terms</a>
+                </FooterLinkList>
+            </FooterSection>
+        </Footer>
         </Layout>
-    </div>
+      </div>
     )
   }
 }
